@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>短视频AI变现课 · 直播入口</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #000;  /* 图片未覆盖区域的底色，你可以改成任何颜色 */
+        }
+
+        /* 背景图片容器：占满全屏，用Flex让内部图片居中 */
+        .bg-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000;  /* 与body背景色一致，形成整体背景 */
+        }
+
+        /* 图片本身：保持原始比例，不拉伸、不裁剪 */
+        .bg-image {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            display: block;
+            object-fit: contain;     /* 确保图片完整显示 */
+        }
+
+        /* 半透明遮罩层：覆盖全屏，保证文字在任何背景下都清晰 */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.35);  /* 黑色半透明遮罩 */
+            z-index: 1;
+        }
+
+        /* 内容区域：位于遮罩上方 */
+        .content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 48px;
+            opacity: 0.95;
+            font-weight: 400;
+        }
+
+        /* 进入直播间按钮 */
+        .live-btn {
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            border: none;
+            color: white;
+            padding: 18px 60px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            border-radius: 60px;
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.4);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            letter-spacing: 2px;
+        }
+
+        .live-btn:active {
+            transform: scale(0.96);
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.5);
+        }
+
+        /* 页脚小提示 */
+        .footer-note {
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            z-index: 2;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 适配小屏幕 */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .subtitle {
+                font-size: 1rem;
+                margin-bottom: 40px;
+            }
+            .live-btn {
+                padding: 16px 40px;
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 背景图片容器：图片会居中完整显示 -->
+    <div class="bg-wrapper">
+        <img class="bg-image" src="bg.png" alt="背景">
+    </div>
+
+    <!-- 遮罩层：覆盖全屏 -->
+    <div class="overlay"></div>
+
+    <!-- 主要按钮内容 -->
+    <div class="content">
+        <h1>🎬 短视频AI变现课</h1>
+        <div class="subtitle">老师直播已开启 · 点击下方进入</div>
+        
+        <!-- 重要：把 YOUR_LIVE_URL 替换成真实的直播链接 -->
+        <button class="live-btn" onclick="window.location.href='https://www.deepseek.com/'">
+            🚀 进入直播间
+        </button>
+    </div>
+
+    <div class="footer-note">
+        ⏰ 直播中 · 立即加入
+    </div>
+
+    <!-- 友好提示：检查链接是否已替换 -->
+    <script>
+        (function() {
+            const btn = document.querySelector('.live-btn');
+            const originalOnclick = btn.onclick;
+            btn.onclick = function(e) {
+                const onclickAttr = btn.getAttribute('onclick');
+                if (onclickAttr && onclickAttr.includes('YOUR_LIVE_URL')) {
+                    alert('⚠️ 请先将按钮链接替换为真实的直播地址！\n找到代码中的 YOUR_LIVE_URL 并替换。');
+                    return false;
+                }
+                if (originalOnclick) {
+                    originalOnclick.call(this, e);
+                }
+            };
+        })();
+    </script>
+
+</body>
+</html>
